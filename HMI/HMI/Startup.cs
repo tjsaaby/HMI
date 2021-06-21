@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using HMI.Data;
 
 namespace HMI
 {
@@ -24,6 +26,9 @@ namespace HMI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<HMIContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("HMIContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

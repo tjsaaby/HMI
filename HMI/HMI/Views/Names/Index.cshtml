@@ -4,38 +4,53 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>HMI</h1>
+<br />
+<div class="text-left">
+    <td class="display-4">Import data</td>
+</div>
+<br />
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <div class="container">
+        <form method="post" asp-controller="Names" asp-action="Import" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <button type="submit">Import from Excel</button>
+        </form>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.NameID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NameID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NameID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<br />
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.NameID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.NameID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.NameID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

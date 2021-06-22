@@ -25,10 +25,17 @@ namespace HMI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
-
             services.AddDbContext<HMIContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HMIContext")));
+            services.AddSwaggerGen();
+            // install Microsoft.AspNetCore.Mvc.NewtonsoftJson 
+            // TODO: Temp fix to handle error
+            //services.AddControllersWithViews()
+            //    .AddNewtonsoftJson(options =>
+            //        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            //    );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +51,14 @@ namespace HMI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -55,7 +70,7 @@ namespace HMI
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Names}/{action=Index}/{id?}");
+                    pattern: "{controller=Sheets}/{action=Index}/{id?}");
             });
         }
     }

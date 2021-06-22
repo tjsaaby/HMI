@@ -4,7 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>HMI</h1>
 <br />
 <div class="text-left">
     <td class="display-4">Import data</td>
@@ -20,10 +19,7 @@
 </div>
 
 <br />
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-    <table class="table">
+<table class="table">
         <thead>
             <tr>
                 <th>
@@ -46,7 +42,7 @@
                         @Html.DisplayFor(modelItem => item.Address)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.NameID">Edit</a> |
+                        @*<a asp-action="Edit" asp-route-id="@item.NameID">Edit</a> |*@
                         <a asp-action="Details" asp-route-id="@item.NameID">Details</a> |
                         <a asp-action="Delete" asp-route-id="@item.NameID">Delete</a>
                     </td>
